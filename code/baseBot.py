@@ -44,7 +44,7 @@ def init():
 def sendMsg2Admin(message):
     utils.myLog(message)
     if config.ADMIN_USER != None:
-        TelegramBase.send_message(message, config.ADMIN_USER)
+        TelegramBase.send_message(utils.getStrDateTime()+ " " + message, config.ADMIN_USER)
     else:
         utils.myLog('No admin user id')
 
@@ -111,7 +111,7 @@ def updateBot(bot):
             chat_id = int(update.message.from_user.id)
             user_real_name = user.first_name #USER_REAL_NAME
             if chat_id not in config.ALLOWED_USERS:
-                message = 'User: ' + user + ' (real name: ' +  user_real_name + ') not allowed. Chat_id ' + str(chat_id) + '. Will be reported'
+                message = 'User: {} not allowed. Chat_id {} command: {}. Will be reported'.format( str(user_real_name), str(chat_id), comando)
                 sendMsg2Admin(message)
                 break
             TelegramBase.chat_ids[user_real_name] = [command_time,chat_id]
@@ -121,7 +121,7 @@ def updateBot(bot):
             elif comando == 'hi':
                 update.message.reply_text('Hello {}'.format(update.message.from_user.first_name), reply_markup=user_keyboard_markup)
             elif comando == '/info':
-                answer = 'Info: ' + utils.getStrDateTime() + '\n==========================\n\n' + 'Tiempo entre imágenes: ' + str(time_between_picture) + '\n '+str(len(os.listdir(config.ImagesDirectory)))+' imágenes'
+                answer = 'Info: ' + utils.getStrDateTime() + '\n==========================\n\n Detalles sobre el bot'
                 update.message.reply_text(answer,parse_mode=telegram.ParseMode.MARKDOWN,reply_markup = user_keyboard_markup)
             elif comando == '/help':
                 bot.send_message(chat_id = chat_id, text = commandList, reply_markup = user_keyboard_markup)
