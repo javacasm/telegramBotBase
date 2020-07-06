@@ -1,1 +1,1 @@
-# telegramBotBase
+Base code for telegram bot (pyhton)
