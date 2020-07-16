@@ -39,7 +39,7 @@ welcomeMsg = "Bienvenido al Bot de ejemplo " + v
 
 def init():
     global welcomeMsg
-    utils.myLog(welcomeMsg)
+    #utils.myLog(welcomeMsg)
 
 def sendMsg2Admin(message):
     utils.myLog(message)
