@@ -84,7 +84,7 @@ def main():
             update_id += 1
         except KeyboardInterrupt:
             utils.myLog('Interrupted')
-            sys.exit(0
+            sys.exit(0)
         except Exception as e:
             utils.myLog('Excepcion!!: ' + str(e))
 
@@ -93,6 +93,7 @@ def updateBot(bot):
     """Answer the message the user sent."""
     global update_id
     global chat_id
+    global welcomeMsg
 
 
     #utils.myLog('Updating telegramBot')
