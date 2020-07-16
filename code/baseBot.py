@@ -52,25 +52,22 @@ def main():
     """Run the bot."""
     global update_id
     global chat_id
-    global time_between_picture
-    global camera
-    
+
     init()
-    
+
     bot = telegram.Bot(config.TELEGRAM_API_TOKEN)
-    
+
     # get the first pending update_id, this is so we can skip over it in case
     # we get an "Unauthorized" exception.
     try:
         update_id = bot.get_updates()[0].update_id
     except IndexError:
         update_id = None
-        
+
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    
+
     last_Beat = int(round(time.time() * 1000))
-    last_picture = 0
-   
+
     sendMsg2Admin(welcomeMsg)
 
     while True:
@@ -87,7 +84,7 @@ def main():
             update_id += 1
         except KeyboardInterrupt:
             utils.myLog('Interrupted')
-            sys.exit(0)            
+            sys.exit(0
         except Exception as e:
             utils.myLog('Excepcion!!: ' + str(e))
 
@@ -96,8 +93,8 @@ def updateBot(bot):
     """Answer the message the user sent."""
     global update_id
     global chat_id
-    global welcomeMsg 
-    
+
+
     #utils.myLog('Updating telegramBot')
     # Request updates after the last update_id
     for update in bot.get_updates(offset=update_id, timeout=10):
@@ -138,7 +135,7 @@ def updateBot(bot):
                 answer = 'Respuesta {} a Ejemplo{}'.format(numero,numero)
                 utils.myLog(answer)
                 update.message.reply_text(answer,parse_mode=telegram.ParseMode.MARKDOWN,reply_markup = user_keyboard_markup)
-             else:
+            else:
                 update.message.reply_text('echobot: '+update.message.text, reply_markup=user_keyboard_markup)                
 
 if __name__ == '__main__':
